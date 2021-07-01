@@ -1,2 +1,2 @@
-# jogo-pong-javascript
- Jogo Pong desenvolvido no curso da Alura
+# Pong com Javascript
+ Desenvolvido no curso da Alura
