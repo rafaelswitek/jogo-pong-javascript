@@ -12,7 +12,16 @@ let yRaquete = 150
 let comprimentoRaquete = 10
 let alturaRaquete = 90
 
+// Variáveis do oponente
+let xRaquete2 = 585
+let yRaquete2 = 150
+let velocidadeY2
+
 let colidiu = false
+
+// Placar do jogo
+let pontos1 = 0
+let pontos2 = 0
 
 function setup() {
   createCanvas(600, 400)
@@ -21,18 +30,23 @@ function setup() {
 function draw() {
   background(0)
   mostraBola()
-  mostraRaquete()
+  mostraRaquete(xRaquete, yRaquete)
+  mostraRaquete(xRaquete2, yRaquete2)
   movimentoBola()
   movimentoRaquete()
+  movimentoRaquete2()
   verificaColisaoBorda()
-  colisaoRaqueteLib()
+  colisaoRaqueteLib(xRaquete, yRaquete)
+  colisaoRaqueteLib(xRaquete2, yRaquete2)
+  mostrarPlacar()
+  marcaPonto()
 }
 
 function mostraBola(){
   circle(xBola, yBola, diametro)
 }
 
-function mostraRaquete(){
+function mostraRaquete(xRaquete, yRaquete){
   rect(xRaquete, yRaquete, comprimentoRaquete, alturaRaquete)
 }
 
@@ -61,10 +75,30 @@ function movimentoRaquete(){
   }
 }
 
-function colisaoRaqueteLib(){
+function movimentoRaquete2(){
+  velocidadeY2 = yBola - yRaquete2 - comprimentoRaquete / 2 - 30
+  yRaquete2 += velocidadeY2
+}
+
+function colisaoRaqueteLib(xRaquete, yRaquete){
   colidiu = collideRectCircle(xRaquete, yRaquete, comprimentoRaquete, alturaRaquete, xBola, yBola, raio)
   
   if(colidiu){
     velocidadeXBola *= -1;
+  }
+}
+
+function mostrarPlacar(){
+  fill(255)
+  text(pontos1, 278, 26)
+  text(pontos2, 321, 26)
+}
+
+function marcaPonto(){
+  if(xBola > 585){
+    pontos1 += 1
+  }
+  if(xBola < 15){
+    pontos2 += 1
   }
 }
